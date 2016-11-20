@@ -21,6 +21,11 @@ namespace Christmas.Models
             }
         }
 
+        public static object GetSubmissions()
+        {
+            return playersAndTheirNumbers;
+        }
+
         private static bool isWithinValidRange(double submission)
         {
             return (submission >= MIN_VALUE && submission <= MAX_VALUE);

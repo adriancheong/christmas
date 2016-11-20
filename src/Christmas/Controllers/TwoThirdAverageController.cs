@@ -25,6 +25,12 @@ namespace Christmas.Controllers
             return TwoThirdAverageGame.GetWinner();
         }
 
+        [HttpGet("Submissions")]
+        public object Submissions()
+        {
+            return TwoThirdAverageGame.GetSubmissions();
+        }
+        
         // GET api/values/5
         [HttpGet("{id}")]
         public string Get(int id)
