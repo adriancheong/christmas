@@ -28,7 +28,7 @@ namespace Christmas.Controllers
             return View();
         }
 
-        public IActionResult Christmas()
+        public IActionResult Game()
         {
             return View();
         }
