@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Christmas.Models;
 
 namespace Christmas.Controllers
 {
@@ -24,6 +25,19 @@ namespace Christmas.Controllers
         {
             ViewData["Message"] = "Your contact page.";
 
+            return View();
+        }
+
+        public IActionResult Christmas()
+        {
+            return View();
+        }
+
+        public IActionResult Results()
+        {
+            ViewData["Results"] = Math.Round(TwoThirdAverageGame.GetTwoThirdOfAverage(), 2);
+            ViewData["Winner"] = TwoThirdAverageGame.GetWinner();
+            ViewData["Count"] = TwoThirdAverageGame.GetNumberOfSubmissions();
             return View();
         }
 

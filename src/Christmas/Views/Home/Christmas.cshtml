@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Christmas";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+<div>
+    <p>Guess a number between 0 - 100 inclusive. The final answer will be 2/3 of the average of everybody's guesses.</p>
+</div>
+
+<div>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="e.g. Adrian">
+    </div>
+    <div class="form-group">
+        <label for="number">Number</label>
+        <input type="text" class="form-control" id="number" placeholder="between 1- 100 e.g. 68">
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn btn-primary" id="btnAdd" onclick="Add()">Submit</button>
+    </div>
+</div>
+
+<script>
+    Add = function () {
+
+        disableAllControls();
+
+        var obj = {
+            "Name": document.getElementById('name').value,
+            "Number": document.getElementById('number').value
+        };
+        var url = "/TwoThirdAverage";
+
+	    $.ajax({
+	        type: "POST",
+	        contentType: "application/json",
+	        data: JSON.stringify(obj),
+            url: url,
+            success: function (ret) {
+	          //alert(ret);
+   	      },
+		    error: function(jqXHR, textStatus, errorThrown) {
+		      console.log(textStatus, errorThrown);
+		      alert(textStatus);
+		      alert(errorThrown);
+		    },
+		    complete: function() {
+		    }
+	    });
+    };
+
+    disableAllControls = function () {
+        $("input.form-control").prop('disabled', true);
+        $("button.btn").prop('disabled', true);
+    }
+</script>
