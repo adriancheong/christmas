@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,7 +24,7 @@ namespace Christmas.Models
 
         public static object GetSubmissions()
         {
-            return playersAndTheirNumbers;
+            return playersAndTheirNumbers.ToList();
         }
 
         private static bool isWithinValidRange(double submission)
