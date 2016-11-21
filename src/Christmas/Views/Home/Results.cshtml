@@ -30,7 +30,7 @@
 <div>
     <table id="tblSubmissions" cellspacing="100">
         <thead>
-            <tr><td>Player</td><td>Submitted Value</td></tr>
+            <tr><th>Player</th><th>Submitted Value</th></tr>
         </thead>
     </table>
 </div>
@@ -57,21 +57,6 @@
         });
     };
 
-    function buildHtmlTable(myList) {
-        for (var i = 0 ; i < myList.length ; i++) {
-            var row$ = $('<tr/>');
-            var cellValue = myList[i]['key'];
-            if (cellValue == null) { cellValue = ""; }
-            row$.append($('<td/>').html(cellValue));
-
-            cellValue = myList[i]['value'];
-            if (cellValue == null) { cellValue = ""; }
-            row$.append($('<td/>').html(cellValue));
-
-            $("#tblSubmissions").append(row$);
-        }
-    }
-
     $(function () {
         var url = "/TwoThirdAverage/Submissions";
         $.ajax({
@@ -79,7 +64,15 @@
             contentType: "application/json",
             url: url,
             success: function (ret) {
-                buildHtmlTable(ret);
+                $('#tblSubmissions').DataTable({
+                    data: ret,
+                    paging: false,
+                    columns: [
+                        { "data": "key" },
+                        { "data": "value" }
+                    ],
+                    order: [[1, "asc"]]
+                });
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(textStatus, errorThrown);
@@ -89,6 +82,8 @@
             complete: function () {
             }
         });
+
+        
     });
 
 </script>
