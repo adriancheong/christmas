@@ -375,6 +375,38 @@ namespace Tests
         }
 
         [Fact]
+        public void testMassiveRandomSpamUseCaseWithMultipleSubmissions2()
+        {
+            TwoThirdAverageGame.Reset();
+            TwoThirdAverageGame.Submit("Adrian", 5.61421187);
+            TwoThirdAverageGame.Submit("Adrian", 26.5127862031807);
+            TwoThirdAverageGame.Submit("Eileen", 16.4589434350589);
+            TwoThirdAverageGame.Submit("Eileen", 16.676945631089);
+            TwoThirdAverageGame.Submit("Lui Hock", 44.4681713840666);
+            TwoThirdAverageGame.Submit("Lui Hock", 0.0136052735450553);
+            TwoThirdAverageGame.Submit("Yee Pey", 10.9343697038424);
+            TwoThirdAverageGame.Submit("Yee Pey", 11.4773266861916);
+            TwoThirdAverageGame.Submit("Jia Sin", 42.7877380582701);
+            TwoThirdAverageGame.Submit("Jia Sin", 29.7159126976324);
+            TwoThirdAverageGame.Submit("Hao Quan", 9.80453411680249);
+            TwoThirdAverageGame.Submit("Hao Quan", 27.34914372);
+            TwoThirdAverageGame.Submit("Jing Yuan", 3.58524387180597);
+            TwoThirdAverageGame.Submit("Jing Yuan", 2.34656529207177);
+            TwoThirdAverageGame.Submit("Allen", 42.0112601247103);
+            TwoThirdAverageGame.Submit("Allen", 0);
+            TwoThirdAverageGame.Submit("Alice", 19.1769405479078);
+            TwoThirdAverageGame.Submit("Alice", 0.524429878832385);
+            TwoThirdAverageGame.Submit("Eunice", 21.8216342839915);
+            TwoThirdAverageGame.Submit("Eunice", 1.41720055445581);
+            TwoThirdAverageGame.Submit("Qi Yang", 46.0901205266567);
+            TwoThirdAverageGame.Submit("Qi Yang", 4.83219247256449);
+
+            Assert.Equal(11, TwoThirdAverageGame.GetNumberOfSubmissions());
+            Assert.Equal(7.32521869, TwoThirdAverageGame.GetTwoThirdOfAverage(), 8);
+            Assert.Equal("Qi Yang", TwoThirdAverageGame.GetWinner());
+        }
+
+        [Fact]
         public void testMassiveRandomSpamUseCaseWithMultipleSubmissionsWithInvalidSubmissionsInBetween()
         {
             TwoThirdAverageGame.Reset();
@@ -423,6 +455,28 @@ namespace Tests
             Assert.Equal(11, TwoThirdAverageGame.GetNumberOfSubmissions());
             Assert.Equal(19.75585547, TwoThirdAverageGame.GetTwoThirdOfAverage(), 8);
             Assert.Equal("Hao Quan", TwoThirdAverageGame.GetWinner());
+        }
+
+        [Fact]
+        public void testNegativeZeroIntegerShouldBeAllowed()
+        {
+            TwoThirdAverageGame.Reset();
+            TwoThirdAverageGame.Submit("Adrian", -0);
+
+            Assert.Equal(1, TwoThirdAverageGame.GetNumberOfSubmissions());
+            Assert.Equal(0, TwoThirdAverageGame.GetTwoThirdOfAverage());
+            Assert.Equal("Adrian", TwoThirdAverageGame.GetWinner());
+        }
+
+        [Fact]
+        public void testNegativeZeroDoubleShouldBeAllowed()
+        {
+            TwoThirdAverageGame.Reset();
+            TwoThirdAverageGame.Submit("Adrian", -0.0);
+
+            Assert.Equal(1, TwoThirdAverageGame.GetNumberOfSubmissions());
+            Assert.Equal(0, TwoThirdAverageGame.GetTwoThirdOfAverage());
+            Assert.Equal("Adrian", TwoThirdAverageGame.GetWinner());
         }
     }
 }
