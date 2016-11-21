@@ -141,5 +141,73 @@ namespace Tests
             Assert.Equal(16, TwoThirdAverageGame.GetTwoThirdOfAverage());
             Assert.Equal("Proper Person", TwoThirdAverageGame.GetWinner());
         }
+
+        [Theory]
+        [InlineData(25)]
+        [InlineData(25.0)]
+        [InlineData(0)]
+        [InlineData(0.0)]
+        [InlineData(100.0)]
+        [InlineData(100)]
+        [InlineData(12.34)]
+        [InlineData(34.56)]
+        public void IfThereAreTwoWinnersTheFirstPersonWhoSubmittedShouldWin(double value)
+        {
+            string firstPerson = "First Person";
+            string secondPerson = "Second Person";
+
+            TwoThirdAverageGame.Reset();
+
+            TwoThirdAverageGame.Submit(firstPerson, value);
+            TwoThirdAverageGame.Submit(secondPerson, value);
+
+            string actual = TwoThirdAverageGame.GetWinner();
+
+            Assert.Equal(firstPerson, actual);
+        }
+
+        [Theory]
+        [InlineData(25)]
+        [InlineData(25.0)]
+        [InlineData(0)]
+        [InlineData(0.0)]
+        [InlineData(100.0)]
+        [InlineData(100)]
+        [InlineData(12.34)]
+        [InlineData(34.56)]
+        public void IfThereAreThreeWinnersTheFirstPersonWhoSubmittedShouldWin(double value)
+        {
+            string firstPerson = "First Person";
+            string secondPerson = "Second Person";
+            string thirdPerson = "Third Person";
+
+            TwoThirdAverageGame.Reset();
+
+            TwoThirdAverageGame.Submit(firstPerson, value);
+            TwoThirdAverageGame.Submit(secondPerson, value);
+            TwoThirdAverageGame.Submit(thirdPerson, value);
+
+            string actual = TwoThirdAverageGame.GetWinner();
+
+            Assert.Equal(firstPerson, actual);
+        }
+
+        [Fact]
+        public void IfAPersonChangesHisValueHeShouldBeConsideredLastOfQueue()
+        {
+            string firstPerson = "First Person";
+            string secondPerson = "Second Person";
+            double winningValue = 25;
+
+            TwoThirdAverageGame.Reset();
+
+            TwoThirdAverageGame.Submit(firstPerson, 50);
+            TwoThirdAverageGame.Submit(secondPerson, winningValue);
+            TwoThirdAverageGame.Submit(firstPerson, winningValue);
+
+            string actual = TwoThirdAverageGame.GetWinner();
+
+            Assert.Equal(secondPerson, actual);
+        }
     }
 }
