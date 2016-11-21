@@ -41,6 +41,61 @@ namespace Tests
         }
 
         [Fact]
+        public void SamePlayerSubmittingShouldHaveHisValueUpdated2()
+        {
+            TwoThirdAverageGame.Reset();
+
+            TwoThirdAverageGame.Submit("Adrian", 25);
+            TwoThirdAverageGame.Submit("Cheong", 50);
+            TwoThirdAverageGame.Submit("Adrian", 15);
+            double actual = TwoThirdAverageGame.GetValueThisPersonSubmitted("Adrian");
+
+            Assert.Equal(15, actual);
+        }
+
+        [Fact]
+        public void SamePlayerSubmittingShouldHaveHisValueUpdated3()
+        {
+            TwoThirdAverageGame.Reset();
+
+            TwoThirdAverageGame.Submit("Adrian", 25);
+            TwoThirdAverageGame.Submit("Cheong", 50);
+            TwoThirdAverageGame.Submit("Adrian", 15);
+            TwoThirdAverageGame.Submit("Cheong", 11);
+            double actual = TwoThirdAverageGame.GetValueThisPersonSubmitted("Cheong");
+
+            Assert.Equal(11, actual);
+        }
+
+        [Fact]
+        public void SamePlayerSubmittingShouldHaveHisValueUpdated4()
+        {
+            TwoThirdAverageGame.Reset();
+
+            TwoThirdAverageGame.Submit("Adrian", 25);
+            TwoThirdAverageGame.Submit("Cheong", 50);
+            TwoThirdAverageGame.Submit("Adrian", 15);
+            TwoThirdAverageGame.Submit("Cheong", 11);
+            TwoThirdAverageGame.Submit("Adrian", 11);
+            double actual = TwoThirdAverageGame.GetValueThisPersonSubmitted("Adrian");
+
+            Assert.Equal(11, actual);
+        }
+
+        [Fact]
+        public void SamePlayerSubmittingShouldHaveHisValueUpdated5()
+        {
+            TwoThirdAverageGame.Reset();
+
+            TwoThirdAverageGame.Submit("Adrian", 25);
+            TwoThirdAverageGame.Submit("Adrian", 15);
+            TwoThirdAverageGame.Submit("Adrian", 10);
+            double actual = TwoThirdAverageGame.GetValueThisPersonSubmitted("Adrian");
+
+            Assert.Equal(10, actual);
+        }
+
+        [Fact]
         public void SamePlayerSubmittingShouldNotIncreaseTotalCount()
         {
             double expected = 1;
@@ -48,6 +103,35 @@ namespace Tests
 
             TwoThirdAverageGame.Submit("Adrian", 25);
             TwoThirdAverageGame.Submit("Adrian", 21);
+            double actual = TwoThirdAverageGame.GetNumberOfSubmissions();
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void SamePlayerSubmittingShouldNotIncreaseTotalCount2()
+        {
+            double expected = 2;
+            TwoThirdAverageGame.Reset();
+
+            TwoThirdAverageGame.Submit("Adrian", 25);
+            TwoThirdAverageGame.Submit("Cheong", 50);
+            TwoThirdAverageGame.Submit("Adrian", 21);
+            double actual = TwoThirdAverageGame.GetNumberOfSubmissions();
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void SamePlayerSubmittingShouldNotIncreaseTotalCount3()
+        {
+            double expected = 2;
+            TwoThirdAverageGame.Reset();
+
+            TwoThirdAverageGame.Submit("Adrian", 25);
+            TwoThirdAverageGame.Submit("Cheong", 50);
+            TwoThirdAverageGame.Submit("Adrian", 21);
+            TwoThirdAverageGame.Submit("Cheong", 20);
             double actual = TwoThirdAverageGame.GetNumberOfSubmissions();
 
             Assert.Equal(expected, actual);

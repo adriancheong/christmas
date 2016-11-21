@@ -7,7 +7,7 @@ namespace Christmas.Models
 {
     public class TwoThirdAverageGame
     {
-        private static Dictionary<string, double> playersAndTheirNumbers = new Dictionary<string, double>();
+        private static List<Submission> playersAndTheirNumbers = new List<Submission>();
         private static readonly double MIN_VALUE = 0.0;
         private static readonly double MAX_VALUE = 100.0;
 
@@ -18,7 +18,10 @@ namespace Christmas.Models
                 string trimmedName = System.Text.RegularExpressions.Regex.Replace(name.Trim(), @"\s+", " ");
 
                 if (!string.IsNullOrEmpty(trimmedName))
-                    playersAndTheirNumbers[trimmedName] = submission;
+                {
+                    playersAndTheirNumbers.Remove(playersAndTheirNumbers.Where(x => x.Name.Equals(trimmedName)).FirstOrDefault());
+                    playersAndTheirNumbers.Add(new Submission { Name = trimmedName, Number = submission });
+                }
             }
         }
 
@@ -37,7 +40,7 @@ namespace Christmas.Models
             if (playersAndTheirNumbers == null || playersAndTheirNumbers.Count == 0)
                 return 0;
 
-            return playersAndTheirNumbers.Values.Average() * 2.0 / 3.0;
+            return playersAndTheirNumbers.Average(x => x.Number) * 2.0 / 3.0;
         }
 
         public static string GetWinner()
@@ -46,13 +49,13 @@ namespace Christmas.Models
             string currentLeader = "No one";
             double answer = GetTwoThirdOfAverage();
 
-            foreach (string name in playersAndTheirNumbers.Keys)
+            foreach (var submission in playersAndTheirNumbers)
             {
-                double delta = Math.Abs(playersAndTheirNumbers[name] - answer);
+                double delta = Math.Abs(submission.Number - answer);
                 if (delta < currentSmallestDelta)
                 {
                     currentSmallestDelta = delta;
-                    currentLeader = name;
+                    currentLeader = submission.Name;
                 }
             }
             return currentLeader;
@@ -65,17 +68,17 @@ namespace Christmas.Models
 
         public static double GetValueThisPersonSubmitted(string v)
         {
-            return playersAndTheirNumbers[v];
+            return playersAndTheirNumbers.Where(x => x.Name.Equals(v)).FirstOrDefault().Number;
         }
 
         public static void Reset()
         {
-            playersAndTheirNumbers = new Dictionary<string, double>();
+            playersAndTheirNumbers.Clear();
         }
 
         public static List<string> GetPlayerList()
         {
-            return playersAndTheirNumbers.Keys.ToList();
+            return playersAndTheirNumbers.Select(x => x.Name).ToList();
         }
     }
 }
