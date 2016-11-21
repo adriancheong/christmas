@@ -293,5 +293,136 @@ namespace Tests
 
             Assert.Equal(secondPerson, actual);
         }
+
+        [Fact]
+        public void IfAPersonChangesHisValueHeShouldBeConsideredLastOfQueue2()
+        {
+            string firstPerson = "First Person";
+            string secondPerson = "Second Person";
+            string thirdPerson = "Third Person";
+            double winningValue = 25;
+            TwoThirdAverageGame.Reset();
+
+            TwoThirdAverageGame.Submit(firstPerson, 0);
+            TwoThirdAverageGame.Submit(secondPerson, winningValue);
+            TwoThirdAverageGame.Submit(thirdPerson, winningValue);
+            TwoThirdAverageGame.Submit(firstPerson, winningValue);
+
+            string actual = TwoThirdAverageGame.GetWinner();
+            Assert.Equal(secondPerson, actual);
+        }
+
+        [Fact]
+        public void IfAPersonChangesHisValueHeShouldBeConsideredLastOfQueue3()
+        {
+            string firstPerson = "First Person";
+            string secondPerson = "Second Person";
+            string thirdPerson = "Third Person";
+            double winningValue = 25;
+            TwoThirdAverageGame.Reset();
+
+            TwoThirdAverageGame.Submit(firstPerson, 0);
+            TwoThirdAverageGame.Submit(secondPerson, 0);
+            TwoThirdAverageGame.Submit(thirdPerson, winningValue);
+            TwoThirdAverageGame.Submit(secondPerson, winningValue);
+            TwoThirdAverageGame.Submit(firstPerson, winningValue);
+
+            string actual = TwoThirdAverageGame.GetWinner();
+            Assert.Equal(thirdPerson, actual);
+        }
+
+        [Fact]
+        public void testMassiveRandomSpamUseCaseWithMultipleSubmissions()
+        {
+            TwoThirdAverageGame.Reset();
+            TwoThirdAverageGame.Submit("Adrian", 73.43242379);
+            TwoThirdAverageGame.Submit("Eileen", 24.1992526401822);
+            TwoThirdAverageGame.Submit("Lui Hock", 12.562050468151);
+            TwoThirdAverageGame.Submit("Yee Pey", 6.54877570622227);
+            TwoThirdAverageGame.Submit("Jia Sin", 42.2141806342241);
+            TwoThirdAverageGame.Submit("Hao Quan", 19.7893892710047);
+            TwoThirdAverageGame.Submit("Jing Yuan", 88.8368410869358);
+            TwoThirdAverageGame.Submit("Allen", 3.55457923765942);
+            TwoThirdAverageGame.Submit("Alice", 14.3036154114645);
+            TwoThirdAverageGame.Submit("Eunice", 0);
+            TwoThirdAverageGame.Submit("Qi Yang", 5.19015232061224);
+            TwoThirdAverageGame.Submit("Adrian", 46.85738196);
+            TwoThirdAverageGame.Submit("Eileen", 3.6763183989933);
+            TwoThirdAverageGame.Submit("Lui Hock", 43.2801036536813);
+            TwoThirdAverageGame.Submit("Jing Yuan", 81.1472941516023);
+            TwoThirdAverageGame.Submit("Allen", 19.5144175092296);
+            TwoThirdAverageGame.Submit("Alice", 4.75170298386008);
+            TwoThirdAverageGame.Submit("Eunice", 59.4291471599364);
+            TwoThirdAverageGame.Submit("Adrian", 14.528706916404);
+            TwoThirdAverageGame.Submit("Yee Pey", 2.88842300573672);
+            TwoThirdAverageGame.Submit("Allen", 67.2416185679742);
+            TwoThirdAverageGame.Submit("Alice", 31.042886259302);
+            TwoThirdAverageGame.Submit("Eunice", 4.64297851);
+            TwoThirdAverageGame.Submit("Jia Sin", 23.7674621195047);
+            TwoThirdAverageGame.Submit("Jing Yuan", 58.6840246285958);
+            TwoThirdAverageGame.Submit("Alice", 48.4684162480857);
+            TwoThirdAverageGame.Submit("Qi Yang", 5.89387287022391);
+            TwoThirdAverageGame.Submit("Adrian", 6.59055132251411);
+            TwoThirdAverageGame.Submit("Yee Pey", 2.43624612573545);
+            TwoThirdAverageGame.Submit("Adrian", 50.040706675074);
+            TwoThirdAverageGame.Submit("Yee Pey", 63.9921404584476);
+            TwoThirdAverageGame.Submit("Adrian", 13.4814486122107);
+            TwoThirdAverageGame.Submit("Yee Pey", 37.0459822944279);
+
+            Assert.Equal(11, TwoThirdAverageGame.GetNumberOfSubmissions());
+            Assert.Equal(19.75585547, TwoThirdAverageGame.GetTwoThirdOfAverage(), 8);
+            Assert.Equal("Hao Quan", TwoThirdAverageGame.GetWinner());
+        }
+
+        [Fact]
+        public void testMassiveRandomSpamUseCaseWithMultipleSubmissionsWithInvalidSubmissionsInBetween()
+        {
+            TwoThirdAverageGame.Reset();
+            TwoThirdAverageGame.Submit("Punk", -0.01);
+            TwoThirdAverageGame.Submit("Adrian", 73.43242379);
+            TwoThirdAverageGame.Submit("Eileen", 24.1992526401822);
+            TwoThirdAverageGame.Submit("Lui Hock", 12.562050468151);
+            TwoThirdAverageGame.Submit("Yee Pey", 6.54877570622227);
+            TwoThirdAverageGame.Submit("Punk", 100.01);
+            TwoThirdAverageGame.Submit("Jia Sin", 42.2141806342241);
+            TwoThirdAverageGame.Submit("Hao Quan", 19.7893892710047);
+            TwoThirdAverageGame.Submit("Jing Yuan", 88.8368410869358);
+            TwoThirdAverageGame.Submit("Allen", 3.55457923765942);
+            TwoThirdAverageGame.Submit("Alice", 14.3036154114645);
+            TwoThirdAverageGame.Submit("Punk", int.MinValue);
+            TwoThirdAverageGame.Submit("Eunice", 0);
+            TwoThirdAverageGame.Submit("Qi Yang", 5.19015232061224);
+            TwoThirdAverageGame.Submit("Adrian", 46.85738196);
+            TwoThirdAverageGame.Submit("Eileen", 3.6763183989933);
+            TwoThirdAverageGame.Submit("Lui Hock", 43.2801036536813);
+            TwoThirdAverageGame.Submit("Punk", int.MaxValue);
+            TwoThirdAverageGame.Submit("Jing Yuan", 81.1472941516023);
+            TwoThirdAverageGame.Submit("Allen", 19.5144175092296);
+            TwoThirdAverageGame.Submit("Alice", 4.75170298386008);
+            TwoThirdAverageGame.Submit("Eunice", 59.4291471599364);
+            TwoThirdAverageGame.Submit("Adrian", 14.528706916404);
+            TwoThirdAverageGame.Submit("Yee Pey", 2.88842300573672);
+            TwoThirdAverageGame.Submit("Allen", 67.2416185679742);
+            TwoThirdAverageGame.Submit("Punk", Double.MinValue);
+            TwoThirdAverageGame.Submit("Alice", 31.042886259302);
+            TwoThirdAverageGame.Submit("Eunice", 4.64297851);
+            TwoThirdAverageGame.Submit("Jia Sin", 23.7674621195047);
+            TwoThirdAverageGame.Submit("Jing Yuan", 58.6840246285958);
+            TwoThirdAverageGame.Submit("Alice", 48.4684162480857);
+            TwoThirdAverageGame.Submit("Qi Yang", 5.89387287022391);
+            TwoThirdAverageGame.Submit("Adrian", 6.59055132251411);
+            TwoThirdAverageGame.Submit("Punk", Double.MaxValue);
+            TwoThirdAverageGame.Submit("Yee Pey", 2.43624612573545);
+            TwoThirdAverageGame.Submit("Adrian", 50.040706675074);
+            TwoThirdAverageGame.Submit("Yee Pey", 63.9921404584476);
+            TwoThirdAverageGame.Submit(null, 50);
+            TwoThirdAverageGame.Submit("Adrian", 13.4814486122107);
+            TwoThirdAverageGame.Submit("Yee Pey", 37.0459822944279);
+            TwoThirdAverageGame.Submit("", 50);
+
+            Assert.Equal(11, TwoThirdAverageGame.GetNumberOfSubmissions());
+            Assert.Equal(19.75585547, TwoThirdAverageGame.GetTwoThirdOfAverage(), 8);
+            Assert.Equal("Hao Quan", TwoThirdAverageGame.GetWinner());
+        }
     }
 }
