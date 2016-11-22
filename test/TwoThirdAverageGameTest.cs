@@ -2,6 +2,7 @@
 using Xunit;
 using Christmas.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Tests
 {
@@ -477,6 +478,37 @@ namespace Tests
             Assert.Equal(1, TwoThirdAverageGame.GetNumberOfSubmissions());
             Assert.Equal(0, TwoThirdAverageGame.GetTwoThirdOfAverage());
             Assert.Equal("Adrian", TwoThirdAverageGame.GetWinner());
+        }
+
+        [Fact]
+        public void gameCanHandleAtLeast1000SubmissionsMultipleTimes()
+        {
+            int noOfRuns = 10;
+            for (int i = 0; i < noOfRuns; i++)
+            {
+                TwoThirdAverageGame.Reset();
+                Assert.Equal(0, TwoThirdAverageGame.GetNumberOfSubmissions());
+                execute1000RandomSubmissions();
+                Assert.True(TwoThirdAverageGame.GetNumberOfSubmissions() > 1000);
+            }
+        }
+
+        private void execute1000RandomSubmissions()
+        {
+            int submissions = 1100;
+            for (int i = 0; i < submissions; i++)
+            {
+                string name = RandomString(8);
+                TwoThirdAverageGame.Submit(name, new Random().NextDouble());
+            }
+        }
+
+        private static Random random = new Random();
+        private string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }
