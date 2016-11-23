@@ -14,6 +14,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
+    <ApplicationInsightsResourceId>/subscriptions/74127359-4933-436c-9396-2dc7aa00d47d/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/Christmas</ApplicationInsightsResourceId>
   </PropertyGroup>
   <ItemGroup>
     <DnxInvisibleContent Include="bower.json" />
