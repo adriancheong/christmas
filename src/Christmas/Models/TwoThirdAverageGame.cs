@@ -10,6 +10,7 @@ namespace Christmas.Models
         private static List<Submission> playersAndTheirNumbers = new List<Submission>();
         private static readonly double MIN_VALUE = 0.0;
         private static readonly double MAX_VALUE = 100.0;
+        private static bool RESULTS_LOCKED = true;
 
         public static void Submit(string name, double submission)
         {
@@ -25,8 +26,11 @@ namespace Christmas.Models
             }
         }
 
-        public static object GetSubmissions()
+        public static List<Submission> GetSubmissions()
         {
+            if (RESULTS_LOCKED)
+                return new List<Submission>();
+
             return playersAndTheirNumbers.ToList();
         }
 
@@ -37,7 +41,7 @@ namespace Christmas.Models
 
         public static double GetTwoThirdOfAverage()
         {
-            if (playersAndTheirNumbers == null || playersAndTheirNumbers.Count == 0)
+            if (RESULTS_LOCKED || playersAndTheirNumbers == null || playersAndTheirNumbers.Count == 0)
                 return 0;
 
             return playersAndTheirNumbers.Average(x => x.Number) * 2.0 / 3.0;
@@ -45,6 +49,9 @@ namespace Christmas.Models
 
         public static string GetWinner()
         {
+            if (RESULTS_LOCKED)
+                return "No one";
+
             double currentSmallestDelta = double.MaxValue;
             string currentLeader = "No one";
             double answer = GetTwoThirdOfAverage();
@@ -63,6 +70,8 @@ namespace Christmas.Models
 
         public static int GetNumberOfSubmissions()
         {
+            if (RESULTS_LOCKED)
+                return 0;
             return playersAndTheirNumbers.Count();
         }
 
@@ -74,11 +83,17 @@ namespace Christmas.Models
         public static void Reset()
         {
             playersAndTheirNumbers.Clear();
+            RESULTS_LOCKED = true;
         }
 
         public static List<string> GetPlayerList()
         {
             return playersAndTheirNumbers.Select(x => x.Name).ToList();
+        }
+
+        public static void ReleaseResults()
+        {
+            RESULTS_LOCKED = false;
         }
     }
 }

@@ -28,6 +28,16 @@ namespace Christmas.Controllers
             return View();
         }
 
+        public IActionResult AD()
+        {
+            return View();
+        }
+
+        public IActionResult Admin()
+        {
+            return View();
+        }
+
         public IActionResult Error()
         {
             return View();

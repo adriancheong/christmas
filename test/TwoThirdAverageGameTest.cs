@@ -17,7 +17,7 @@ namespace Tests
             Assert.Equal("No one", TwoThirdAverageGame.GetWinner());
 
             TwoThirdAverageGame.Submit("Adrian", 25);
-
+            TwoThirdAverageGame.ReleaseResults();
             Assert.Equal(1, TwoThirdAverageGame.GetNumberOfSubmissions());
             Assert.True(TwoThirdAverageGame.GetTwoThirdOfAverage() > 0);
             Assert.Equal("Adrian", TwoThirdAverageGame.GetWinner());
@@ -104,6 +104,7 @@ namespace Tests
 
             TwoThirdAverageGame.Submit("Adrian", 25);
             TwoThirdAverageGame.Submit("Adrian", 21);
+            TwoThirdAverageGame.ReleaseResults();
             double actual = TwoThirdAverageGame.GetNumberOfSubmissions();
 
             Assert.Equal(expected, actual);
@@ -118,6 +119,7 @@ namespace Tests
             TwoThirdAverageGame.Submit("Adrian", 25);
             TwoThirdAverageGame.Submit("Cheong", 50);
             TwoThirdAverageGame.Submit("Adrian", 21);
+            TwoThirdAverageGame.ReleaseResults();
             double actual = TwoThirdAverageGame.GetNumberOfSubmissions();
 
             Assert.Equal(expected, actual);
@@ -133,6 +135,7 @@ namespace Tests
             TwoThirdAverageGame.Submit("Cheong", 50);
             TwoThirdAverageGame.Submit("Adrian", 21);
             TwoThirdAverageGame.Submit("Cheong", 20);
+            TwoThirdAverageGame.ReleaseResults();
             double actual = TwoThirdAverageGame.GetNumberOfSubmissions();
 
             Assert.Equal(expected, actual);
@@ -221,7 +224,7 @@ namespace Tests
             TwoThirdAverageGame.Submit("Proper Person", 24);
 
             TwoThirdAverageGame.Submit(stupidName, stupidNumber);
-
+            TwoThirdAverageGame.ReleaseResults();
             Assert.Equal(1, TwoThirdAverageGame.GetNumberOfSubmissions());
             Assert.Equal(16, TwoThirdAverageGame.GetTwoThirdOfAverage());
             Assert.Equal("Proper Person", TwoThirdAverageGame.GetWinner());
@@ -245,7 +248,7 @@ namespace Tests
 
             TwoThirdAverageGame.Submit(firstPerson, value);
             TwoThirdAverageGame.Submit(secondPerson, value);
-
+            TwoThirdAverageGame.ReleaseResults();
             string actual = TwoThirdAverageGame.GetWinner();
 
             Assert.Equal(firstPerson, actual);
@@ -271,7 +274,7 @@ namespace Tests
             TwoThirdAverageGame.Submit(firstPerson, value);
             TwoThirdAverageGame.Submit(secondPerson, value);
             TwoThirdAverageGame.Submit(thirdPerson, value);
-
+            TwoThirdAverageGame.ReleaseResults();
             string actual = TwoThirdAverageGame.GetWinner();
 
             Assert.Equal(firstPerson, actual);
@@ -289,7 +292,7 @@ namespace Tests
             TwoThirdAverageGame.Submit(firstPerson, 50);
             TwoThirdAverageGame.Submit(secondPerson, winningValue);
             TwoThirdAverageGame.Submit(firstPerson, winningValue);
-
+            TwoThirdAverageGame.ReleaseResults();
             string actual = TwoThirdAverageGame.GetWinner();
 
             Assert.Equal(secondPerson, actual);
@@ -308,7 +311,7 @@ namespace Tests
             TwoThirdAverageGame.Submit(secondPerson, winningValue);
             TwoThirdAverageGame.Submit(thirdPerson, winningValue);
             TwoThirdAverageGame.Submit(firstPerson, winningValue);
-
+            TwoThirdAverageGame.ReleaseResults();
             string actual = TwoThirdAverageGame.GetWinner();
             Assert.Equal(secondPerson, actual);
         }
@@ -327,7 +330,7 @@ namespace Tests
             TwoThirdAverageGame.Submit(thirdPerson, winningValue);
             TwoThirdAverageGame.Submit(secondPerson, winningValue);
             TwoThirdAverageGame.Submit(firstPerson, winningValue);
-
+            TwoThirdAverageGame.ReleaseResults();
             string actual = TwoThirdAverageGame.GetWinner();
             Assert.Equal(thirdPerson, actual);
         }
@@ -369,7 +372,7 @@ namespace Tests
             TwoThirdAverageGame.Submit("Yee Pey", 63.9921404584476);
             TwoThirdAverageGame.Submit("Adrian", 13.4814486122107);
             TwoThirdAverageGame.Submit("Yee Pey", 37.0459822944279);
-
+            TwoThirdAverageGame.ReleaseResults();
             Assert.Equal(11, TwoThirdAverageGame.GetNumberOfSubmissions());
             Assert.Equal(19.75585547, TwoThirdAverageGame.GetTwoThirdOfAverage(), 8);
             Assert.Equal("Hao Quan", TwoThirdAverageGame.GetWinner());
@@ -401,7 +404,7 @@ namespace Tests
             TwoThirdAverageGame.Submit("Eunice", 1.41720055445581);
             TwoThirdAverageGame.Submit("Qi Yang", 46.0901205266567);
             TwoThirdAverageGame.Submit("Qi Yang", 4.83219247256449);
-
+            TwoThirdAverageGame.ReleaseResults();
             Assert.Equal(11, TwoThirdAverageGame.GetNumberOfSubmissions());
             Assert.Equal(7.32521869, TwoThirdAverageGame.GetTwoThirdOfAverage(), 8);
             Assert.Equal("Qi Yang", TwoThirdAverageGame.GetWinner());
@@ -452,7 +455,7 @@ namespace Tests
             TwoThirdAverageGame.Submit("Adrian", 13.4814486122107);
             TwoThirdAverageGame.Submit("Yee Pey", 37.0459822944279);
             TwoThirdAverageGame.Submit("", 50);
-
+            TwoThirdAverageGame.ReleaseResults();
             Assert.Equal(11, TwoThirdAverageGame.GetNumberOfSubmissions());
             Assert.Equal(19.75585547, TwoThirdAverageGame.GetTwoThirdOfAverage(), 8);
             Assert.Equal("Hao Quan", TwoThirdAverageGame.GetWinner());
@@ -463,7 +466,7 @@ namespace Tests
         {
             TwoThirdAverageGame.Reset();
             TwoThirdAverageGame.Submit("Adrian", -0);
-
+            TwoThirdAverageGame.ReleaseResults();
             Assert.Equal(1, TwoThirdAverageGame.GetNumberOfSubmissions());
             Assert.Equal(0, TwoThirdAverageGame.GetTwoThirdOfAverage());
             Assert.Equal("Adrian", TwoThirdAverageGame.GetWinner());
@@ -474,7 +477,7 @@ namespace Tests
         {
             TwoThirdAverageGame.Reset();
             TwoThirdAverageGame.Submit("Adrian", -0.0);
-
+            TwoThirdAverageGame.ReleaseResults();
             Assert.Equal(1, TwoThirdAverageGame.GetNumberOfSubmissions());
             Assert.Equal(0, TwoThirdAverageGame.GetTwoThirdOfAverage());
             Assert.Equal("Adrian", TwoThirdAverageGame.GetWinner());
@@ -489,8 +492,53 @@ namespace Tests
                 TwoThirdAverageGame.Reset();
                 Assert.Equal(0, TwoThirdAverageGame.GetNumberOfSubmissions());
                 execute1000RandomSubmissions();
+                TwoThirdAverageGame.ReleaseResults();
                 Assert.True(TwoThirdAverageGame.GetNumberOfSubmissions() > 1000);
             }
+        }
+
+        [Fact]
+        public void ResultsShouldNotBeReleasedUntilAdminReleasesThem()
+        {
+            TwoThirdAverageGame.Reset();
+            TwoThirdAverageGame.Submit("Adrian", 73.43242379);
+            TwoThirdAverageGame.Submit("Eileen", 24.1992526401822);
+            TwoThirdAverageGame.Submit("Lui Hock", 12.562050468151);
+            TwoThirdAverageGame.Submit("Yee Pey", 6.54877570622227);
+            TwoThirdAverageGame.Submit("Jia Sin", 42.2141806342241);
+            TwoThirdAverageGame.Submit("Hao Quan", 19.7893892710047);
+            TwoThirdAverageGame.Submit("Jing Yuan", 88.8368410869358);
+            TwoThirdAverageGame.Submit("Allen", 3.55457923765942);
+            TwoThirdAverageGame.Submit("Alice", 14.3036154114645);
+            TwoThirdAverageGame.Submit("Eunice", 0);
+            TwoThirdAverageGame.Submit("Qi Yang", 5.19015232061224);
+            TwoThirdAverageGame.Submit("Adrian", 46.85738196);
+            TwoThirdAverageGame.Submit("Eileen", 3.6763183989933);
+            TwoThirdAverageGame.Submit("Lui Hock", 43.2801036536813);
+            TwoThirdAverageGame.Submit("Jing Yuan", 81.1472941516023);
+            TwoThirdAverageGame.Submit("Allen", 19.5144175092296);
+            TwoThirdAverageGame.Submit("Alice", 4.75170298386008);
+            TwoThirdAverageGame.Submit("Eunice", 59.4291471599364);
+            TwoThirdAverageGame.Submit("Adrian", 14.528706916404);
+            TwoThirdAverageGame.Submit("Yee Pey", 2.88842300573672);
+            TwoThirdAverageGame.Submit("Allen", 67.2416185679742);
+            TwoThirdAverageGame.Submit("Alice", 31.042886259302);
+            TwoThirdAverageGame.Submit("Eunice", 4.64297851);
+            TwoThirdAverageGame.Submit("Jia Sin", 23.7674621195047);
+            TwoThirdAverageGame.Submit("Jing Yuan", 58.6840246285958);
+            TwoThirdAverageGame.Submit("Alice", 48.4684162480857);
+            TwoThirdAverageGame.Submit("Qi Yang", 5.89387287022391);
+            TwoThirdAverageGame.Submit("Adrian", 6.59055132251411);
+            TwoThirdAverageGame.Submit("Yee Pey", 2.43624612573545);
+            TwoThirdAverageGame.Submit("Adrian", 50.040706675074);
+            TwoThirdAverageGame.Submit("Yee Pey", 63.9921404584476);
+            TwoThirdAverageGame.Submit("Adrian", 13.4814486122107);
+            TwoThirdAverageGame.Submit("Yee Pey", 37.0459822944279);
+
+            Assert.Equal(0, TwoThirdAverageGame.GetNumberOfSubmissions());
+            Assert.Equal(0, TwoThirdAverageGame.GetTwoThirdOfAverage());
+            Assert.Equal(0, TwoThirdAverageGame.GetSubmissions().Count);
+            Assert.Equal("No one", TwoThirdAverageGame.GetWinner());
         }
 
         private void execute1000RandomSubmissions()

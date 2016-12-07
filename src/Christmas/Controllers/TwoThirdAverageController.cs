@@ -51,5 +51,11 @@ namespace Christmas.Controllers
         {
             TwoThirdAverageGame.Reset();
         }
+
+        [HttpPost("Release")]
+        public void Release()
+        {
+            TwoThirdAverageGame.ReleaseResults();
+        }
     }
 }
