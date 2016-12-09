@@ -1,11 +1,13 @@
 ﻿@{
-    ViewData["Title"] = "Christmas";
+    ViewData["Title"] = "2/3 Of The Average";
 }
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
 <div>
-    <p>Guess a number between 0 - 100 inclusive. The final answer will be 2/3 of the average of everybody's guesses.</p>
+    <p>Guess a number between 0 - 100 inclusive. The final answer will be <b>2/3 of the average</b> of everybody's guesses.</p>
+    <p>The winner will be the person with the number closest to the final answer.</p>
+    <p>If you submit multiple answers, only your latest submission will be considered.</p>
 </div>
 
 <div>
@@ -15,7 +17,7 @@
     </div>
     <div class="form-group">
         <label for="number">Number</label>
-        <input type="text" class="form-control" id="number" placeholder="between 1- 100 e.g. 68">
+        <input type="text" class="form-control" id="number" placeholder="Between 0 - 100 e.g. 68">
     </div>
     <div class="form-group">
         <button type="button" class="btn btn-primary" id="btnAdd" onclick="Add()">Submit</button>
