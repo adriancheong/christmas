@@ -30,15 +30,19 @@ namespace Christmas.Controllers
         {
             return TwoThirdAverageGame.GetSubmissions();
         }
-        
-        // GET api/values/5
+
+        [HttpGet("Admin/Submissions")]
+        public object AdminSubmissions()
+        {
+            return TwoThirdAverageGame.GetSubmissionsAsAdmin();
+        }
+
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/values
         [HttpPost]
         public void Post([FromBody]Submission value)
         {

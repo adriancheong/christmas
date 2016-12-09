@@ -26,6 +26,11 @@ namespace Christmas.Models
             }
         }
 
+        public static List<Submission> GetSubmissionsAsAdmin()
+        {
+            return playersAndTheirNumbers.ToList();
+        }
+
         public static List<Submission> GetSubmissions()
         {
             if (RESULTS_LOCKED)

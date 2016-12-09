@@ -1,4 +1,12 @@
-﻿<br />
+﻿<style>
+    table, td, th {
+        border: solid;
+        border-width: thin;
+        padding: 10px;
+    }
+</style>
+
+<br />
 
 <div class="form-group">
     <button type="button" class="btn btn-success" id="btnRelease" onclick="Release()">Release</button>
@@ -6,6 +14,14 @@
 
 <div class="form-group">
     <button type="button" class="btn btn-danger" id="btnReset" onclick="Reset()">Reset</button>
+</div>
+
+<div>
+    <table id="tblSubmissions" cellspacing="100">
+        <thead>
+            <tr><th>Player</th><th>Submitted Value</th></tr>
+        </thead>
+    </table>
 </div>
 
 <script>
@@ -47,5 +63,28 @@
             }
         });
     };
+
+    $(function () {
+        var url = "/TwoThirdAverage/Admin/Submissions";
+        $.ajax({
+            type: "GET",
+            contentType: "application/json",
+            url: url
+        }).done(function (ret) {
+            $('#tblSubmissions').DataTable({
+                data: ret,
+                paging: false,
+                columns: [
+                    { "data": "name" },
+                    { "data": "number" }
+                ],
+                order: [[1, "asc"]]
+            });
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+            alert(textStatus);
+            alert(errorThrown);
+        });
+    });
 
 </script>
