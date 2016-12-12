@@ -10,7 +10,7 @@
     <p>If you submit multiple answers, only your latest submission will be considered.</p>
 </div>
 
-<div>
+<div id="divFormSubmit">
     <div class="form-group">
         <label for="name">Name</label>
         <input type="text" class="form-control" id="name" placeholder="e.g. Adrian">
@@ -20,12 +20,20 @@
         <input type="text" class="form-control" id="number" placeholder="Between 0 - 100 e.g. 68">
     </div>
     <div class="form-group">
-        <button type="button" class="btn btn-primary" id="btnAdd" onclick="Add()">Submit</button>
+        <button type="button" class="btn btn-primary" data-loading-text="Submitting..." id="btnSubmit" onclick="Submit()">Submit</button>
     </div>
 </div>
 
 <script>
-    Add = function () {
+    showSuccessPage = function () {
+        $("#divFormSubmit").replaceWith("<div class='jumbotron'><h2>Your entry has been successfully submitted</h2></div>");
+    };
+
+    showErrorPage = function () {
+        $("#divFormSubmit").replaceWith("<div class='jumbotron'><h2>An error occurred. Please refresh the page and try again.</h2></div>");
+    };
+
+    Submit = function () {
 
         disableAllControls();
 
@@ -39,22 +47,21 @@
 	        type: "POST",
 	        contentType: "application/json",
 	        data: JSON.stringify(obj),
-            url: url,
-            success: function (ret) {
-	          //alert(ret);
-   	      },
-		    error: function(jqXHR, textStatus, errorThrown) {
-		      console.log(textStatus, errorThrown);
-		      //alert(textStatus);
-		      //alert(errorThrown);
-		    },
-		    complete: function() {
-		    }
+            url: url
+	    }).done(function () {
+	        showSuccessPage();
+	    }).fail(function (jqXHR, textStatus, errorThrown) {
+	        console.log(textStatus, errorThrown);
+	        showErrorPage();
 	    });
     };
 
     disableAllControls = function () {
         $("input.form-control").prop('disabled', true);
         $("button.btn").prop('disabled', true);
-    }
+    };
+
+    $('#btnSubmit').on('click', function () {
+        var $btn = $(this).button('loading')
+    });
 </script>
