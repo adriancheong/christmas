@@ -1,0 +1,88 @@
+﻿<style>
+    .winner {
+        color: forestgreen;
+        font-weight: 800;
+    }
+</style>
+
+<div class="jumbotron"><h2 id="divWinner" align="center">Loading...</h2></div>
+
+<div align="center">
+    <button type="button" class="btn btn-success" id="btnRandomize" disabled onclick="Randomize()">GO!</button>
+</div>
+
+<script>
+    var allStaff;
+    var permStaff;
+    var contractStaff;
+    var counter;
+    var speed;
+
+    function Randomize() {
+        allStaff = permStaff.concat(contractStaff);
+        unHighlightWinner();
+        counter = 0;
+        speed = 1;
+        go();
+    }
+
+    function go() {
+        var randomPersonIndex = Math.floor(Math.random() * allStaff.length);
+        $("#divWinner").text(allStaff[randomPersonIndex]);
+        speed = speed * 1.02;
+        if (counter++ < 300) {
+            setTimeout(go, speed);
+        }
+        else {
+            highlightWinner();
+        }
+    }
+
+    function highlightWinner() {
+        $("#divWinner").addClass("winner");
+    }
+
+    function unHighlightWinner() {
+        $("#divWinner").removeClass("winner");
+    }
+
+    $(function () {
+        getAllStaff();
+    });
+
+    function getAllStaff() {
+        $.ajax({
+            type: "GET",
+            contentType: "application/json",
+            url: "https://sin4r3app0010xd.gic.com.sg:8001/gic/sb/activedirectory/v1/group/grptd_sin"
+        }).done(function (ret) {
+            permStaff = ret.users;
+            getContractStaff();
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+            alert(textStatus);
+            alert(errorThrown);
+        });
+    }
+
+    function getContractStaff() {
+        $.ajax({
+            type: "GET",
+            contentType: "application/json",
+            url: "https://sin4r3app0010xd.gic.com.sg:8001/gic/sb/activedirectory/v1/group/grptdcontract"
+        }).done(function (ret) {
+            contractStaff = ret.users;
+            ready();
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+            alert(textStatus);
+            alert(errorThrown);
+        });
+    }
+
+    function ready() {
+        $("#divWinner").text("Ready");
+        $("#btnRandomize").removeAttr("disabled");
+    }
+
+</script>

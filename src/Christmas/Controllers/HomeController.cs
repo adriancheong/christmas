@@ -38,6 +38,11 @@ namespace Christmas.Controllers
             return View();
         }
 
+        public IActionResult LuckyDraw()
+        {
+            return View();
+        }
+
         public IActionResult Error()
         {
             return View();
