@@ -1,15 +1,18 @@
-﻿@{
+﻿<h1>http://game.southeastasia.cloudapp.azure.com/</h1>
+@{
     ViewData["Title"] = "2/3 Of The Average";
 }
 <h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
-
+<br />
 <div>
-    <p>Guess a number between 0 - 100 inclusive. The final answer will be <b>2/3 of the average</b> of everybody's guesses.</p>
-    <p>The winner will be the person with the number closest to the final answer.</p>
+    <p>Guess a number between 0 - 100 inclusive.</p>
+    <p>Everybody's answer will be summed, divided by the total number of submissions, and multiplied by 2/3.</p>
+    <p>This final number is the winning answer.</p>
+    <p>The winner is the person whose submitted number is closest to the final number.</p>
+    <p>Please enter your name properly if not you might be disqualified.</p>
     <p>If you submit multiple answers, only your latest submission will be considered.</p>
 </div>
-
+<br />
 <div id="divFormSubmit">
     <div class="form-group">
         <label for="name">Name</label>
