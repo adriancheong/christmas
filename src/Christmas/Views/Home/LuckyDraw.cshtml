@@ -19,7 +19,6 @@
     var speed;
 
     function Randomize() {
-        allStaff = permStaff.concat(contractStaff);
         unHighlightWinner();
         counter = 0;
         speed = 1;
@@ -35,6 +34,7 @@
         }
         else {
             highlightWinner();
+            allStaff.splice(randomPersonIndex, 1);
         }
     }
 
@@ -81,6 +81,7 @@
     }
 
     function ready() {
+        allStaff = permStaff.concat(contractStaff);
         $("#divWinner").text("Ready");
         $("#btnRandomize").removeAttr("disabled");
     }
