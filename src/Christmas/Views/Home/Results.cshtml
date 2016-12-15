@@ -6,7 +6,7 @@
     }
 </style>
 
-<h3>Number of Submissions: @ViewData["Count"]</h3>
+
 <h2>2/3 of the Average is: @ViewData["Results"]</h2>
 
 <div class="row">
@@ -21,7 +21,11 @@
 
 <div>
     <h2>Winner is @ViewData["Winner"]</h2>
+    <h4>Second is @ViewData["Second"]</h4>
+    <h5>Third is @ViewData["Third"]</h5>
 </div>
+
+<h3>Number of Submissions: @ViewData["Count"]</h3>
 
 <div>
     <table id="tblSubmissions" cellspacing="100">

@@ -72,11 +72,53 @@ namespace Christmas.Models
                 double delta = Math.Abs(submission.Number - answer);
                 if (delta < currentSmallestDelta)
                 {
-                    currentSmallestDelta = delta;
                     currentLeader = submission.Name;
+                    currentSmallestDelta = delta;
                 }
             }
             return currentLeader;
+        }
+
+        public static string GetSecond()
+        {
+            if (GAME_STATUS == Status.IN_PROGRESS)
+                return "No one";
+
+            double currentSmallestDelta = double.MaxValue;
+            string currentSecond = "No one";
+            double answer = GetTwoThirdOfAverage();
+
+            foreach (var submission in playersAndTheirNumbers)
+            {
+                double delta = Math.Abs(submission.Number - answer);
+                if (delta < currentSmallestDelta && submission.Name != GetWinner())
+                {
+                    currentSecond = submission.Name;
+                    currentSmallestDelta = delta;
+                }
+            }
+            return currentSecond;
+        }
+
+        public static string GetThird()
+        {
+            if (GAME_STATUS == Status.IN_PROGRESS)
+                return "No one";
+
+            double currentSmallestDelta = double.MaxValue;
+            string currentThird = "No one";
+            double answer = GetTwoThirdOfAverage();
+
+            foreach (var submission in playersAndTheirNumbers)
+            {
+                double delta = Math.Abs(submission.Number - answer);
+                if (delta < currentSmallestDelta && submission.Name != GetWinner() && submission.Name != GetSecond())
+                {
+                    currentThird = submission.Name;
+                    currentSmallestDelta = delta;
+                }
+            }
+            return currentThird;
         }
 
         public static int GetNumberOfSubmissions()

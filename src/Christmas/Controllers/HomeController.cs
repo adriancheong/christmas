@@ -24,6 +24,8 @@ namespace Christmas.Controllers
         {
             ViewData["Results"] = Math.Round(TwoThirdAverageGame.GetTwoThirdOfAverage(), 2);
             ViewData["Winner"] = TwoThirdAverageGame.GetWinner();
+            ViewData["Second"] = TwoThirdAverageGame.GetSecond();
+            ViewData["Third"] = TwoThirdAverageGame.GetThird();
             ViewData["Count"] = TwoThirdAverageGame.GetNumberOfSubmissions();
             return View();
         }
