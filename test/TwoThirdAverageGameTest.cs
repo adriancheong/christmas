@@ -638,6 +638,43 @@ namespace Tests
             Assert.Equal("Hao Quan", TwoThirdAverageGame.GetWinner());
         }
 
+        [Fact]
+        public void FirstSecondThirdPlaceShouldBeInThatOrderOfSubmissionIfTheyAllTie()
+        {
+            string firstPerson = "First Person";
+            string secondPerson = "Second Person";
+            string thirdPerson = "Third Person";
+
+            TwoThirdAverageGame.Reset();
+            TwoThirdAverageGame.Submit(firstPerson, 25);
+            TwoThirdAverageGame.Submit(secondPerson, 25);
+            TwoThirdAverageGame.Submit(thirdPerson, 25);
+            TwoThirdAverageGame.ReleaseResults();
+
+            Assert.Equal(firstPerson, TwoThirdAverageGame.GetWinner());
+            Assert.Equal(secondPerson, TwoThirdAverageGame.GetSecond());
+            Assert.Equal(thirdPerson, TwoThirdAverageGame.GetThird());
+        }
+
+        [Fact]
+        public void FirstPersonShouldBecomeLastPlaceIfHeReSubmittedInTheCaseOfAllTie()
+        {
+            string firstPerson = "First Person";
+            string secondPerson = "Second Person";
+            string thirdPerson = "Third Person";
+
+            TwoThirdAverageGame.Reset();
+            TwoThirdAverageGame.Submit(firstPerson, 25);
+            TwoThirdAverageGame.Submit(secondPerson, 25);
+            TwoThirdAverageGame.Submit(thirdPerson, 25);
+            TwoThirdAverageGame.Submit(firstPerson, 25);
+            TwoThirdAverageGame.ReleaseResults();
+
+            Assert.Equal(secondPerson, TwoThirdAverageGame.GetWinner());
+            Assert.Equal(thirdPerson, TwoThirdAverageGame.GetSecond());
+            Assert.Equal(firstPerson, TwoThirdAverageGame.GetThird());
+        }
+
         private void execute1000RandomSubmissions()
         {
             int submissions = 1100;
