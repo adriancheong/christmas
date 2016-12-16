@@ -21,14 +21,14 @@
     function Randomize() {
         unHighlightWinner();
         counter = 0;
-        speed = 1;
+        speed = 0.00001;
         go();
     }
 
     function go() {
         var randomPersonIndex = Math.floor(Math.random() * allStaff.length);
         $("#divWinner").text(allStaff[randomPersonIndex]);
-        speed = speed * 1.02;
+        speed = speed * 1.059;
         if (counter++ < 300) {
             setTimeout(go, speed);
         }
